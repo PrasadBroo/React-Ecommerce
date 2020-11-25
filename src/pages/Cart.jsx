@@ -1,55 +1,38 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../css/Cart.css";
-import { firestore } from "../services/firebase";
 import { CartContext } from "../contexts/CartContext";
 import CartItem from "../components/CartItem";
 import { Button } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 export default function Cart() {
   const { totalItems, itemQuantity } = useContext(CartContext);
-  const [cartItems, setCartItems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
-    async function getData() {
-      let allitems = await Promise.all(
-        totalItems.map(async (item) => {
-          let allData = await (
-            await firestore().collection("items").where("id", "==", item).get()
-          ).docs.map((data) => data.data());
-          return allData[0];
-        })
-      );
-      setCartItems(allitems);
+    if (itemQuantity.length === 0) {
+      setTotalCost(0);
     }
-    getData();
-  }, [totalItems]);
-  useEffect(() => {
-    let allItemCost = cartItems.map((item) => {
-      return parseInt(item.productPrice);
+    let allItemCost = itemQuantity.map((item) => {
+      return parseInt(item.price) * parseInt(item.quantity);
     });
     if (allItemCost.length === 0) return;
     let totalItemsCost = allItemCost.reduce((a, b) => a + b);
     setTotalCost(totalItemsCost);
-  }, [cartItems, totalCost]);
-  useEffect(() => {
-    console.log(itemQuantity);
-  }, [itemQuantity]);
+  }, [itemQuantity, totalCost]);
+
   return (
     <div className="cartPage">
       <div className="cart-all-items">
-        {cartItems.map((item, i) => {
-          
+        {itemQuantity.map((item, i) => {
           return (
             <CartItem
-              itemQuantity={
-                itemQuantity.find((ele) => ele.id === item.id).quantity
-              }
+              itemQuantity={parseInt(item.quantity)}
+              url={item.url}
               productId={item.id}
-              productImg={item.productImg}
-              productName={item.productName}
-              productPrice={item.productPrice}
-              productDescription={item.productDescription}
+              productImg={item.img}
+              productName={item.name}
+              productPrice={item.price}
+              productDescription={item.discription}
               key={i}
             />
           );

@@ -63,3 +63,33 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width:800px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .container .img {
+        width: 100%;
+    }
+
+    .container .img img {
+        height: 15rem;
+        width: 70%;
+    }
+
+    .container .content,
+    .container .content .description {
+        width: 100%;
+    }
+
+    .productName,
+    .productPrice,
+    .description {
+        text-align: center;
+    }
+
+    .container .content form {
+        justify-content: center;
+    }
+}

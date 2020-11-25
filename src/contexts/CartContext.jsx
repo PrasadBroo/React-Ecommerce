@@ -21,28 +21,52 @@ export default function CartContextProvider(props) {
   useEffect(() => {
     setUniqueItems(totalItems.filter(onlyUnique).length);
   }, [totalItems]);
+  useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(totalItems));
+    sessionStorage.setItem("cartQuantity", JSON.stringify(itemQuantity));
+  }, [itemQuantity, totalItems]);
+
   return (
     <CartContext.Provider
-      value={{ uniqueItems, totalItems, addItemToCart, itemQuantity }}
+      value={{
+        uniqueItems,
+        totalItems,
+        addItemToCart,
+        itemQuantity,
+        removeItemFromCart,
+      }}
     >
       {props.children}
     </CartContext.Provider>
   );
 
-  function addItemToCart(productid, productQuantity) {
+  function addItemToCart(
+    productid,
+    productQuantity,
+    productPrice,
+    productUrl,
+    productName,
+    productImg,
+    productDiscription
+  ) {
     setTotalItems([...totalItems, productid]);
     setitemQuantity([
       ...itemQuantity,
-      { id: productid, quantity: productQuantity },
+      {
+        id: productid,
+        quantity: productQuantity,
+        price: productPrice,
+        discription: productDiscription,
+        url: productUrl,
+        name: productName,
+        img: productImg,
+      },
     ]);
-    sessionStorage.setItem("cart", JSON.stringify([...totalItems, productid]));
-    sessionStorage.setItem(
-      "cartQuantity",
-      JSON.stringify([
-        ...itemQuantity,
-        { id: productid, quantity: productQuantity },
-      ])
-    );
+  }
+  function removeItemFromCart(productid) {
+    let newCart = [...itemQuantity].filter((item) => item.id !== productid);
+    setitemQuantity(newCart);
+    setTotalItems([...totalItems].filter((ele) => ele !== productid));
   }
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;

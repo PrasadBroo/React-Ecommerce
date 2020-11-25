@@ -36,17 +36,17 @@ export default function Item(props) {
     e.target.style.borderTop = 0;
   }
   function handelAddToCart() {
-    addItemToCart(props.id, 1);
+    addItemToCart(
+      props.id,
+      1,
+      props.price,
+      props.url,
+      props.name,
+      props.img,
+      props.description
+    );
   }
   return (
-    // <div className="item">
-    //   <img src={props.img} alt="item" />
-    //   <p className="productName">
-    //     <a href={props.url}>{props.name}</a>
-    //   </p>
-    //   <p className="price">{"$" + props.price + ".00"}</p>
-    // </div>
-
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia

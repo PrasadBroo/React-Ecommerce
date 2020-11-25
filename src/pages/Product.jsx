@@ -20,7 +20,7 @@ export default function Product() {
   const [itemId, setItemId] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  const { uniqueItems, totalItems, addItemToCart } = useContext(CartContext);
+  const { totalItems, addItemToCart } = useContext(CartContext);
 
   useEffect(() => {
     setShowLoader(true);
@@ -105,7 +105,15 @@ export default function Product() {
   function handelSubmit(e) {
     e.preventDefault();
     setItemId(currentItem.id);
-    addItemToCart(currentItem.id, itemQuantity);
+    addItemToCart(
+      currentItem.id,
+      itemQuantity,
+      currentItem.productPrice,
+      currentItem.productUrl,
+      currentItem.productName,
+      currentItem.productImg,
+      currentItem.productDiscription
+    );
     cogoToast.success("Item Added To Cart");
     setShowLoader(true);
     setTimeout(() => setRedirect(true), 1000);
