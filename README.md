@@ -1,4 +1,5 @@
 # [React E-Commerce Website](https://react-e-commercesite.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9057239b-aa6f-4cab-8934-ea5a45376d3d/deploy-status)](https://app.netlify.com/sites/react-e-commercesite/deploys)
 
 ![](header.png)
 
