@@ -1,0 +1,26 @@
+.accountpage {
+    margin: 5rem auto;
+    width: 90%;
+    background-color: #f8f8f8;
+}
+
+.tabs {
+    height: auto;
+    font-size: 1.3rem;
+}
+
+.tabs li:hover {
+    cursor: pointer;
+
+}
+
+.tabs .tabActive {
+    border-bottom: 0.5rem solid #fff;
+    background-color: #fff;
+}
+
+.tabs li {
+    padding: 0.5rem;
+    border: 0.5rem solid #f8f8f8;
+
+}

@@ -20,7 +20,7 @@ export default function AuthunticateContextProvider(props) {
   }, []);
   return (
     <AuthunticateContext.Provider
-      value={{ user, login, signup, logout, showloader }}
+      value={{ user, login, signup, logout, showloader, updateProfile }}
     >
       {props.children}
     </AuthunticateContext.Provider>
@@ -60,7 +60,22 @@ export default function AuthunticateContextProvider(props) {
     setLoader(true);
     setTimeout(async () => {
       await auth().signOut();
+      setUser(null);
       setLoader(false);
     }, 2000);
+  }
+
+  async function updateProfile(name, email) {
+    if (auth().currentUser.photoURL === null && auth().currentUser) {
+      try {
+        setLoader(true);
+        await auth().currentUser.updateEmail(email);
+        await auth().currentUser.updateProfile({ displayName: name });
+        setLoader(false);
+      } catch (error) {
+        setLoader(false);
+        cogoToast.error(error.code);
+      }
+    }
   }
 }

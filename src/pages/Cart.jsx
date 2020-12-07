@@ -5,7 +5,7 @@ import CartItem from "../components/CartItem";
 import { Button } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 export default function Cart() {
-  const { totalItems, itemQuantity } = useContext(CartContext);
+  const {  itemQuantity } = useContext(CartContext);
   const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {

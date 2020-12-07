@@ -17,7 +17,6 @@ export default function Product() {
   const [showLoader, setShowLoader] = useState(false);
   const [value, setValue] = useState(3);
   const [itemQuantity, setItemQuantity] = useState(1);
-  const [itemId, setItemId] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const { totalItems, addItemToCart } = useContext(CartContext);
@@ -104,7 +103,6 @@ export default function Product() {
 
   function handelSubmit(e) {
     e.preventDefault();
-    setItemId(currentItem.id);
     addItemToCart(
       currentItem.id,
       itemQuantity,
