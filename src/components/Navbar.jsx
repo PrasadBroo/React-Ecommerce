@@ -62,7 +62,7 @@ export default function Navbar() {
         </ul>
       );
     return (
-      <ul className={burger ? "list-active lan" : "noclass lan"}>
+      <ul className={burger ? "list-active l-a-l" : "noclass l-a-l"}>
         <li className="cart">
           <Link to="/cart">
             <Badge badgeContent={uniqueItems} color="primary" showZero>
