@@ -1,6 +1,6 @@
 import cogoToast from "cogo-toast";
 import React, { createContext, useState, useEffect } from "react";
-import { auth } from "../services/firebase";
+import { auth, firestore } from "../services/firebase";
 export const AuthunticateContext = createContext();
 
 export default function AuthunticateContextProvider(props) {
@@ -47,6 +47,15 @@ export default function AuthunticateContextProvider(props) {
       await auth().createUserWithEmailAndPassword(email, password);
       setLoader(false);
       cogoToast.success("Signup Success");
+
+      let addressRef = firestore().collection("usersAddress");
+      let userTempAddress = {
+        address:
+          " Iris WatsonP.O. Box 283 8562 Fusce Rd. Frederick Nebraska 20620 ",
+        uid: auth().currentUser.uid,
+      };
+      await addressRef.add(userTempAddress); // Adding For Later Use
+
       // For Email Verification
       // auth().currentUser.sendEmailVerification();
       // return alert("Email Verification Link Sent,Plz Verify To Continue Use");

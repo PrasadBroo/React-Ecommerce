@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import style from "../../css/subcss/Profile.module.css";
 import { AuthunticateContext } from "../../contexts/AuthunticateContext";
-
 import Loader from "../../components/Loader";
+import { auth, firestore } from "../../services/firebase";
 
 export default function Profile() {
   const { user, showloader, updateProfile } = useContext(AuthunticateContext);
   const [editMode, setEditMode] = useState(false);
+  const [userAddress, setUserAddress] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userMobileNumber, setUserMobileNumber] = useState("+91123456789");
   const [userDateJoined, setUserDateJoined] = useState("2 Dec 1999");
@@ -21,6 +22,7 @@ export default function Profile() {
       setUserMobileNumber(user.phoneNumber ?? "+911245957139");
       setUserDateJoined(user.metadata.creationTime);
       setUserFullName(user.displayName ?? "Iron Man");
+      fetchAddres();
     }
   }, [user]);
   return (
@@ -67,7 +69,6 @@ export default function Profile() {
                 disabled={!editMode}
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
-                defaultValue="sketchware1@gmail.com"
                 className={style.accountEmail}
               />
               <div>
@@ -79,8 +80,9 @@ export default function Profile() {
               <input
                 id="user-address"
                 type="text"
-                disabled
-                defaultValue="null"
+                onChange={(e) => setUserAddress(e.target.value)}
+                disabled={!editMode}
+                value={userAddress}
                 className={style.accountEmail}
               />
               <div>
@@ -106,7 +108,6 @@ export default function Profile() {
                 id="user-joining-date"
                 type="text"
                 disabled
-                defaultValue="2 Dec 2020"
                 value={userDateJoined}
                 className={style.accountEmail}
               />
@@ -128,6 +129,23 @@ export default function Profile() {
   function handelChangeProfile(e) {
     e.preventDefault();
     setEditMode(!editMode);
+    updateAddress();
     updateProfile(userFullName, userEmail);
+  }
+
+  async function fetchAddres() {
+    let addressRef = firestore()
+      .collection("usersAddress")
+      .where("uid", "==", auth().currentUser.uid);
+    let address = (await addressRef.get()).docs.map((item) => item.data());
+    setUserAddress(address[0].address);
+  }
+  async function updateAddress() {
+    let addressRef = firestore()
+      .collection("usersAddress")
+      .where("uid", "==", auth().currentUser.uid);
+    (await addressRef.get()).docs.map((item) =>
+      item.ref.update({ address: userAddress })
+    );
   }
 }
