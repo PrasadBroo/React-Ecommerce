@@ -72,6 +72,7 @@ export default function AuthunticateContextProvider(props) {
         await auth().currentUser.updateEmail(email);
         await auth().currentUser.updateProfile({ displayName: name });
         setLoader(false);
+        cogoToast.success("Profile Updated Successfully");
       } catch (error) {
         setLoader(false);
         cogoToast.error(error.code);

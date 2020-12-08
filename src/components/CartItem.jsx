@@ -18,16 +18,13 @@ export default function CartItem(props) {
             <h2 className="cart-item-name">
               <Link href={props.url}>{props.productName}</Link>
             </h2>
-            <DeleteIcon
-              style={{ cursor: "pointer" }}
-              onClick={handelDeleteItem}
-            />
           </div>
 
           <h2 className="cart-item-price">
             {props.itemQuantity} x $ {props.productPrice} .00
           </h2>
         </div>
+        <DeleteIcon className="deleteIcon" onClick={handelDeleteItem} />
       </div>
     </>
   );

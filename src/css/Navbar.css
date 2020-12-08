@@ -146,7 +146,7 @@ nav h1 a:hover {
         padding: 6px;
     }
 
-    ul {
+    .l-a-l {
         position: absolute;
         flex-direction: column;
         justify-content: center;
@@ -195,7 +195,7 @@ nav h1 a:hover {
         font-size: 25px;
     }
 
-    ul {
+    .l-a-l {
         width: 50%;
     }
 
@@ -246,7 +246,13 @@ nav h1 a:hover {
 }
 
 @media screen and (max-width: 900px) and (min-width: 500px) {
-    ul {
+    .l-a-l {
         width: 50%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .l-a-l {
+        min-width: 40%;
     }
 }

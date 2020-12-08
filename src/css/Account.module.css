@@ -24,3 +24,13 @@
     border: 0.5rem solid #f8f8f8;
 
 }
+
+@media screen and (max-width: 500px) {
+
+    .tabs {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+
+}

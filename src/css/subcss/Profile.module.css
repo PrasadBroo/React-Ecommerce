@@ -108,3 +108,19 @@
 .btnSubmit {
     text-align: right;
 }
+
+@media screen and (max-width: 500px) {
+    .profilePic img {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    .editBtn {
+        font-size: 0.7rem;
+        padding: 0.4rem;
+    }
+
+    .accountInfo {
+        width: 100%;
+    }
+}

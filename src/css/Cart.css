@@ -57,3 +57,46 @@
     display: flex;
     justify-content: space-between;
 }
+
+.deleteIcon {
+    color: rgb(145, 145, 145);
+}
+
+
+@media screen and (max-width:500px) {
+    .cart-item {
+        position: relative;
+        display: block;
+        text-align: center;
+    }
+
+    .deleteIcon {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .cart-item-checkout {
+        display: block;
+        text-align: center;
+    }
+
+    .cart-item-checkout-btn {
+        margin: 0.5rem 0;
+    }
+
+    .cart-item-img img {
+        width: 60%;
+    }
+
+    .cart-item-name {
+        width: 100%;
+    }
+
+    .cart-item-img,
+    .cart-item-name {
+        text-align: center;
+    }
+
+}
