@@ -184,7 +184,6 @@ nav h1 a:hover {
 
     .list-active {
         display: block;
-        height: 125px;
     }
 
     ul li a:hover::after {
